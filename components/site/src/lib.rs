@@ -721,7 +721,8 @@ impl Site {
         let output = page.render_html(&self.tera, &self.config, &self.library.read().unwrap())?;
         let content = self.inject_livereload(output);
         let components: Vec<&str> = page.path.split('/').collect();
-        let current_path = self.write_content(&components, "index.html", content)?;
+        let filename = page.meta.filename.clone().unwrap_or("index.html".to_string());
+        let current_path = self.write_content(&components, &filename, content)?;
 
         // Copy any asset we found previously into the same directory as the index.html
         self.copy_assets(page.file.path.parent().unwrap(), &page.assets, &current_path)?;

@@ -45,6 +45,9 @@ output_dir = "public"
 # Enabling this also prevents the deletion of the output folder itself on rebuilds.
 preserve_dotfiles_in_output = false
 
+# Which extensions to look for when compiling templates.
+template_extensions = ["*ml", "md", "txt", "json", "ics"]
+
 # When set to "true", the Sass files in the `sass` directory in the site root are compiled.
 # Sass files in theme directories are always compiled.
 compile_sass = false

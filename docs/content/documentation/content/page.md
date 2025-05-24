@@ -119,6 +119,10 @@ render = false
 # The section path will still be used.
 slug = ""
 
+# The filename to render this page with at its given path.
+# Can't be an empty string if present.
+filename = "index.html"
+
 # The path the content will appear at.
 # If set, it cannot be an empty string and will override both `slug` and the filename.
 # The sections' path won't be used.

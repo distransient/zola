@@ -95,6 +95,8 @@ pub struct Config {
     pub output_dir: String,
     /// Whether dotfiles inside the output directory are preserved when rebuilding the site
     pub preserve_dotfiles_in_output: bool,
+    /// Template extensions to use when globbing for templates.
+    pub template_extensions: Vec<String>,
 
     pub link_checker: link_checker::LinkChecker,
     /// The setup for which slugification strategies to use for paths, taxonomies and anchors
@@ -415,6 +417,13 @@ impl Default for Config {
             translations: HashMap::new(),
             output_dir: "public".to_string(),
             preserve_dotfiles_in_output: false,
+            template_extensions: vec![
+                "*ml".to_string(),
+                "md".to_string(),
+                "txt".to_string(),
+                "json".to_string(),
+                "ics".to_string(),
+            ],
             link_checker: link_checker::LinkChecker::default(),
             slugify: slugify::Slugify::default(),
             search: search::Search::default(),

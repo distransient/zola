@@ -46,6 +46,10 @@ pub struct PageFrontMatter {
     /// The page slug. Will be used instead of the filename if present
     /// Can't be an empty string if present
     pub slug: Option<String>,
+    /// The file name the page renders with at its given path.
+    /// Can't be an empty string if present.
+    /// Defaults to `index.html` if not set.
+    pub filename: Option<String>,
     /// The path the page appears at, overrides the slug if set in the front-matter
     /// otherwise is set after parsing front matter and sections
     /// Can't be an empty string if present
@@ -93,6 +97,16 @@ impl PageFrontMatter {
         if let Some(ref slug) = f.slug {
             if slug.is_empty() {
                 bail!("`slug` can't be empty if present")
+            }
+        }
+
+        if let Some(ref filename) = f.filename {
+            if filename.is_empty() {
+                bail!("`filename` can't be empty if present")
+            }
+
+            if filename.contains("/") {
+                bail!("`filename` cannot contain path separator characters. Use `path`.")
             }
         }
 
@@ -157,6 +171,7 @@ impl Default for PageFrontMatter {
             draft: false,
             render: true,
             slug: None,
+            filename: None,
             path: None,
             taxonomies: HashMap::new(),
             weight: None,
